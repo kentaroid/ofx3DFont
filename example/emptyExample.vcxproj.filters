@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\testApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofx3DFont\src\ofx3DFont.cpp">
+      <Filter>addons\ofx3DFont\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofx3DFont\libs\poly2tri\sweep\advancing_front.cc">
+      <Filter>addons\ofx3DFont\libs\poly2tri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofx3DFont\libs\poly2tri\sweep\cdt.cc">
+      <Filter>addons\ofx3DFont\libs\poly2tri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofx3DFont\libs\poly2tri\sweep\sweep.cc">
+      <Filter>addons\ofx3DFont\libs\poly2tri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofx3DFont\libs\poly2tri\sweep\sweep_context.cc">
+      <Filter>addons\ofx3DFont\libs\poly2tri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofx3DFont\libs\poly2tri\common\shapes.cc">
+      <Filter>addons\ofx3DFont\libs\poly2tri</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxTrueTypeFontUL2\src\ofxTrueTypeFontUL2.cpp">
+      <Filter>addons\ofxTrueTypeFontUL2\src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons">
+      <UniqueIdentifier>{0b6854f2-200a-43d1-8bd2-42e0d88b7f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTrueTypeFontUL2">
+      <UniqueIdentifier>{d4207aa7-8491-47b0-8d8f-c85aa87a4af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofx3DFont">
+      <UniqueIdentifier>{2c4c0864-eef1-462a-9357-1cc7ff3f5381}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofx3DFont\src">
+      <UniqueIdentifier>{a6364706-6a74-437c-afc8-8218c31e8111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxTrueTypeFontUL2\src">
+      <UniqueIdentifier>{6d57b466-4e4b-414b-881c-bd2dbbd2e3de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofx3DFont\libs">
+      <UniqueIdentifier>{2698d1e6-acb5-4af3-aee8-1f9337237105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofx3DFont\libs\poly2tri">
+      <UniqueIdentifier>{5ac47366-0ded-4ed5-84a7-cbf32e2b085a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofx3DFont\src\ofx3DFont.h">
+      <Filter>addons\ofx3DFont\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxTrueTypeFontUL2\src\ofxTrueTypeFontUL2.h">
+      <Filter>addons\ofxTrueTypeFontUL2\src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
