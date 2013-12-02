@@ -1,7 +1,15 @@
 #ofx3DFont
 
-Released!
 Documents in preparation...
+
+##Depend on ofxTrueTypeFontUL2!
+
+https://github.com/kentaroid/ofxTrueTypeFontUL2
+
+ofxTrueTypeFontUL2 is Including the **harfbuzz** that is an OpenType text shaping engine. 
+It enables to use various functions important in typography, such as ligature and kerning pairs.
+
+##Examples
 
 ![screen shot1](http://kentaroid.com/wp-content/uploads/2013/12/367e900cc7149fb875027fa550044d97-620x481.png)
 

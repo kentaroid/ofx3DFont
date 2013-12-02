@@ -17,9 +17,6 @@ ofx3DFont::~ofx3DFont(void){
 
 
 void ofx3DFont::setup(string font,float fontSize,float depthRate, float smoothRad,bool reverseFace,float internalFontSize,float simplifyAmt){
-    //simplifyAmtは長さではなく角度的な範囲。
-    //一定のフォントサイズを保っていればsimplifyAmtの結果はおなじになる。
-    //文字のDetailを決定できるのはあくまでfontSizeが有効となる。
     face.loadFont(font,internalFontSize,true,true,simplifyAmt,0,false);
     setup(face,fontSize,depthRate,smoothRad,mReverseFace);
 }
@@ -109,12 +106,6 @@ vector<ofxFaceVec2> ofx3DFont::_getFacePositions(T str, float x, float y,float w
     return facePosis;
 }
 
-
-
-
-
-
-
 ofMesh ofx3DFont::pushMesh(ofPath &path){
 	ofMesh mesh;
 	vector<ofPolyline> outline;
@@ -128,6 +119,7 @@ ofMesh ofx3DFont::pushMesh(ofPath &path){
     int frontPointer,backPointer;
     int i,t;
 
+	//Vec for face.
 	ofVec3f v1=mesh.getVertex(mesh.getIndex(0));
 	ofVec3f v2=mesh.getVertex(mesh.getIndex(1));
 	ofVec3f v3=mesh.getVertex(mesh.getIndex(2));
@@ -138,7 +130,7 @@ ofMesh ofx3DFont::pushMesh(ofPath &path){
 	v1=outline[0][0];
 	v2=outline[0][1];
 	ofVec3f v5;
-	//側面の向きを計算
+	//Vec for side.
 	for(i=0;i<numTri;i++){
 		v3=mesh.getVertex(mesh.getIndex(i*3));
 		v4=mesh.getVertex(mesh.getIndex(i*3+1));
@@ -177,10 +169,10 @@ ofMesh ofx3DFont::pushMesh(ofPath &path){
 		velTopFace=!velTopFace;
 	}
     
-	//表面形成
+	//front face normals
     for(i=0;i<numVrt;i++){mesh.addNormal(ofVec3f(0,0,1));}
 
-	//表Index
+	//front face Index
 	if(!velTopFace){
 		for(i=0;i<numTri;i++){
 			t=mesh.getIndex(i*3+1);
@@ -189,12 +181,12 @@ ofMesh ofx3DFont::pushMesh(ofPath &path){
 		}
 	}
 
-	//裏面頂点
+	//back face varts and normals
     for(i=0;i<numVrt;i++){
         mesh.addVertex(ofVec3f(mesh.getVertex(i).x,mesh.getVertex(i).y,-mPushDepth));
         mesh.addNormal(ofVec3f(0,0,-1));
     }
-	//裏面Index
+	//back face Index
     for(i=0;i<numTri;i++){
         mesh.addTriangle(numVrt+mesh.getIndex(i*3),numVrt+mesh.getIndex(i*3+2),numVrt+mesh.getIndex(i*3+1));
     }
@@ -295,7 +287,7 @@ void ofx3DFont::triangulate(ofPath &path,ofMesh& mesh,vector<ofPolyline>&outline
 		}
 	}
 
-    //入れ子(hole)の構造を取得 (OF_POLY_WINDING_ODDである前提)
+    //making stuructures.   (holes,OF_POLY_WINDING_ODD)
     vector<int> pStructures;
 	vector<bool>hools;
 	int parentID;
