@@ -9,32 +9,32 @@
 
 ofx3DFont::ofx3DFont(void){
     bUseVbo=true;
+    mSmoothRad=30;
+    mReverseFace=false;
+	mFontSize_=64.0f;
+	mDepthRate_=0.3f;
 }
-
 
 ofx3DFont::~ofx3DFont(void){
 }
 
-
-void ofx3DFont::setup(string font,float fontSize,float depthRate, float smoothRad,bool reverseFace,float internalFontSize,float simplifyAmt){
-    face.loadFont(font,internalFontSize,true,true,simplifyAmt,0,false);
-    setup(face,fontSize,depthRate,smoothRad,mReverseFace);
+void ofx3DFont::setup(string font,float fontSize,float depthRate, float smoothRad,bool reverseFace){
+    loadFont(font,128.0f,true,true,0.3f,0,false);
+    setup(fontSize,depthRate,smoothRad,mReverseFace);
 }
-void ofx3DFont::setup(ofxTrueTypeFontUL2 &face,float fontSize,float depthRate,float smoothRad,bool reverseFace){
-    if(face.getFontSize()<10.0f)ofLogNotice("ofx3DFont") << "[setup] font size is too small. There may be destroyed font face.";
-    mFontRender=&face;
-    mPushDepth=mFontRender->getFontSize()*depthRate;
+
+void ofx3DFont::setup(float fontSize,float depthRate,float smoothRad,bool reverseFace){
     mSmoothRad=smoothRad;
     mReverseFace=reverseFace;
-    mFinalizeScale=fontSize/mFontRender->getFontSize();
-    mInternalScale=1.0f/mFinalizeScale;
+	mFontSize_=fontSize;
+	mDepthRate_=depthRate;
 }
 
 void ofx3DFont::_testFace(int index){
     if(bUseVbo){
         if(vboMap.count(index) == 0){
             if (meshMap.count(index) == 0){
-                ofPath p=mFontRender->getCountours(index);
+                ofPath p=getCountours(index);
                 meshMap[index]=pushMesh(p);
             }
             const ofMesh &mesh = meshMap[index];
@@ -49,7 +49,7 @@ void ofx3DFont::_testFace(int index){
         }
     }else{
         if (meshMap.count(index) == 0){
-            ofPath p=mFontRender->getCountours(index);
+            ofPath p=getCountours(index);
             meshMap[index]=pushMesh(p);
         }
     }
@@ -87,7 +87,7 @@ vector<ofMesh> ofx3DFont::_getMeshes(T str,float x, float y, float z,float width
 }
 
 template<class T>
-void ofx3DFont::_drawString(T str,float x, float y,float z,float width,float height,int textAlign){
+void ofx3DFont::_draw3dString(T str,float x, float y,float z,float width,float height,int textAlign){
     const vector<ofxFaceVec2> &facePosis=_getFacePositions(str,x,y,width,height,textAlign);
     for(vector<ofxFaceVec2>::const_iterator itIn=facePosis.begin();itIn!=facePosis.end();++itIn){
         drawFaceAtPos((*itIn).faceIndex,(*itIn).x,(*itIn).y,z);
@@ -97,7 +97,9 @@ void ofx3DFont::_drawString(T str,float x, float y,float z,float width,float hei
 template<class T>
 vector<ofxFaceVec2> ofx3DFont::_getFacePositions(T str, float x, float y,float width ,float height,int textAlign){
     vector<ofxFaceVec2> facePosis;
-    mFontRender->getLayoutData(facePosis,str,x*mInternalScale,y*mInternalScale,width*mInternalScale,height*mInternalScale,textAlign);
+    float mFinalizeScale=mFontSize_/getFontSize();
+    float mInternalScale=1.0f/mFinalizeScale;
+    getLayoutData(facePosis,str,x*mInternalScale,y*mInternalScale,width*mInternalScale,height*mInternalScale,textAlign);
     for(vector<ofxFaceVec2>::iterator itIn=facePosis.begin();itIn!=facePosis.end();++itIn){
         _testFace((*itIn).faceIndex);
         (*itIn).x*=mFinalizeScale;
@@ -107,6 +109,11 @@ vector<ofxFaceVec2> ofx3DFont::_getFacePositions(T str, float x, float y,float w
 }
 
 ofMesh ofx3DFont::pushMesh(ofPath &path){
+
+
+	float mPushDepth=getFontSize()*mDepthRate_;
+    float mFinalizeScale=mFontSize_/getFontSize();
+
 	ofMesh mesh;
 	vector<ofPolyline> outline;
 
@@ -375,11 +382,11 @@ vector<ofMesh> ofx3DFont::getMeshes(wstring str,float x, float y,float z,float w
     return _getMeshes(str, x,  y, z,width, height, textAlign);
 }
 
-void ofx3DFont::drawString(string str, float x, float y,float z,float width,float height,int textAlign){
-    _drawString(str, x,  y,z, width, height, textAlign);
+void ofx3DFont::draw3dString(string str, float x, float y,float z,float width,float height,int textAlign){
+    _draw3dString(str, x,  y,z, width, height, textAlign);
 }
-void ofx3DFont::drawString(wstring str, float x, float y,float z,float width,float height,int textAlign){
-    _drawString(str, x,  y,z, width, height, textAlign);
+void ofx3DFont::draw3dString(wstring str, float x, float y,float z,float width,float height,int textAlign){
+    _draw3dString(str, x,  y,z, width, height, textAlign);
 }
 
 vector<ofxFaceVec2> ofx3DFont::getFacePositions(wstring str, float x, float y,float width,float height,int textAlign){

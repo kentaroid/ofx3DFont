@@ -20,9 +20,6 @@ public:
 	void gotMessage(ofMessage msg);
 
 
-
-	ofxTrueTypeFontUL2 face;
-	ofxTrueTypeFontUL2 faceNavi;
 	wstring show;
 	string strAlign;
 	string strDirection;
@@ -30,7 +27,7 @@ public:
 	bool bRotation;
 	int align;
 	
-	ofx3DFont face3d;
+	ofx3DFont face;
 	ofx3DFont faceNavi3d;
 	ofLight light;
 

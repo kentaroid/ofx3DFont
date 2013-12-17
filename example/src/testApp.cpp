@@ -9,12 +9,16 @@ void testApp::setup(){
 	faceNavi3d.setup(OF_TTF_SANS,15,0.3);
     
     
-    
 	//Load three font-faces.//////////////////////////////////////////////////////////
 	//setup 3d font by ofxTrueTypeFontUL2
 	//Able to use  all features. such as harbuzz or mixed fonts...
-    
-    //Load japanse face.
+
+	//Setup 3d Face. (DisplayFontSize, DepthRate by fontsize) 
+    face.setup(64,0.3);
+
+	//load font for ofxTrueTypeFontUL2 ,
+	//This font size is used for internal process that building outline pathes, 
+    //Load japanse face. 
     face.loadFont("Yumin Demibold",128,true,true,0.3f,0,true)|| // windows 8.1
 		face.loadSubFont("YuMincho")|| // osx mavericks
 		face.loadSubFont("Meiryo")|| // windows 7
@@ -45,7 +49,7 @@ void testApp::setup(){
     face.useVrt2Layout(true);
 	face.setLineHeight(face.getFontSize()*1.5);
     
-	face3d.setup(face,64,0.3);
+	
     
     //text////////////////////////////////////////////////////////////////////////////
 	show.append(L"ofx3DFont Openframeworks 3Dタイポグラフィ\n");
@@ -111,11 +115,11 @@ void testApp::draw(){
 		
 		if(renderingMode){
 			ofSetColor(255,255,255,255);
-			face3d.drawString(show,x,y,0,w,h,align);
+			face.draw3dString(show,x,y,0,w,h,align);
 		}else{
 			ofSetColor(127,255,127,255);
 			glPolygonMode(GL_FRONT, GL_LINE);
-			face3d.drawString(show,x,y,0,w,h,align);
+			face.draw3dString(show,x,y,0,w,h,align);
 			glPolygonMode(GL_FRONT, GL_FILL);
 		}
         
@@ -127,13 +131,13 @@ void testApp::draw(){
     
     
     ofSetColor(255,255,0,255);
-    faceNavi3d.drawString("Rendering mode [Space]: "+ofToString(renderingMode?"Face":"Wire-frame"),50,ofGetHeight()-80,10);
-    faceNavi3d.drawString("Rotation [R]: "+ofToString(bRotation?"YES":"NO"),ofGetWidth()*.5,ofGetHeight()-80,10);
+    faceNavi3d.draw3dString("Rendering mode [Space]: "+ofToString(renderingMode?"Face":"Wire-frame"),50,ofGetHeight()-80,10);
+    faceNavi3d.draw3dString("Rotation [R]: "+ofToString(bRotation?"YES":"NO"),ofGetWidth()*.5,ofGetHeight()-80,10);
     
-    faceNavi3d.drawString("Wrap-mode [key w]: "+ ofToString(face.getWordWrap()?"Word-wrap":"Character-wrap"),50,ofGetHeight()-50,10);
-    faceNavi3d.drawString("Alignment-mode [key e]: "+ ofToString(face.getAlignByPixel()?"Alignment by Pixel":"Optimized"),50,ofGetHeight()-20,10);
-    faceNavi3d.drawString("Text-Alignment [key 0-9]: "+strAlign,ofGetWidth()*.5,ofGetHeight()-50,10);
-    faceNavi3d.drawString("Text-Direction [key a,z,s,x,d,c,f,v]: "+strDirection,ofGetWidth()*.5,ofGetHeight()-20,10);
+    faceNavi3d.draw3dString("Wrap-mode [key w]: "+ ofToString(face.getWordWrap()?"Word-wrap":"Character-wrap"),50,ofGetHeight()-50,10);
+    faceNavi3d.draw3dString("Alignment-mode [key e]: "+ ofToString(face.getAlignByPixel()?"Alignment by Pixel":"Optimized"),50,ofGetHeight()-20,10);
+    faceNavi3d.draw3dString("Text-Alignment [key 0-9]: "+strAlign,ofGetWidth()*.5,ofGetHeight()-50,10);
+    faceNavi3d.draw3dString("Text-Direction [key a,z,s,x,d,c,f,v]: "+strDirection,ofGetWidth()*.5,ofGetHeight()-20,10);
     
     
 }
