@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofxTrueTypeFontUL2.h"
-
+#include "ofxMeshHelper.h"
 
 class ofx3DFont :public ofxTrueTypeFontUL2{
 public:
@@ -20,13 +20,20 @@ public:
 	void drawFace(int index);
 	void drawFaceAtPos(int index,float x,float y,float z=0);
 
+	ofMesh &getMesh(int index);
+
 	vector<ofxFaceVec2> getFacePositions(wstring str, float x, float y,float width=0,float height=0,int textAlign=UL2_TEXT_ALIGN_INVALID);
 	vector<ofxFaceVec2> getFacePositions(string str, float x, float y,float width=0,float height=0,int textAlign=UL2_TEXT_ALIGN_INVALID);
 
 	bool getUseVBO();
 	void setUseVBO(bool useVBO);
+
+	bool getGenerateTexCoord();
+	void setGenerateTexCoord(bool generateTexCoord,float detailScale=1.0);
 private:
 	
+	bool mGenerateTexCoord;
+	float mCoordDetailScale;
 	//float mPushDepth;
 	float mSmoothRad;
 	//float mFinalizeScale;
@@ -36,8 +43,7 @@ private:
 	float mDepthRate_;
 
 	void _testFace(int index);
-	ofMesh pushMesh(ofPath &path);
-	void triangulate(ofPath &path,ofMesh& mesh,vector<ofPolyline>&outline);
+
 
 	template<class T>
 	vector<ofMesh> _getMeshes(T str,float x, float y,float z,float width,float height,int textAlign);
@@ -52,7 +58,6 @@ private:
 	map<int,GLuint> vboIndexNumMap;
 	bool bUseVbo;
 	
-	ofTessellator mTessellator;
 
 
 };

@@ -28,6 +28,9 @@
     <ClCompile Include="..\..\..\addons\ofxTrueTypeFontUL2\src\ofxTrueTypeFontUL2.cpp">
       <Filter>addons\ofxTrueTypeFontUL2\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofx3DFont\src\ofxMeshHelper.cpp">
+      <Filter>addons\ofx3DFont\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -64,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxTrueTypeFontUL2\src\ofxTrueTypeFontUL2.h">
       <Filter>addons\ofxTrueTypeFontUL2\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofx3DFont\src\ofxMeshHelper.h">
+      <Filter>addons\ofx3DFont\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

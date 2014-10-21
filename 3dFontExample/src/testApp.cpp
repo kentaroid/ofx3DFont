@@ -67,7 +67,7 @@ void testApp::setup(){
 	glCullFace(GL_BACK);//裏面をカリング
 	glEnable(GL_DEPTH_TEST);
 	
-	renderingMode=false;
+	renderingMode=true;
 	bRotation=false;
 }
 
@@ -90,13 +90,13 @@ void testApp::draw(){
 	
 	//base line
 	ofSetColor(255,127,255,255);
-	ofLine(0,y,ofGetWidth(),y);
-	ofLine(x,0,x,ofGetHeight());
+	ofDrawLine(0,y,ofGetWidth(),y);
+	ofDrawLine(x,0,x,ofGetHeight());
 	
 	//cursor
 	ofSetColor(127,127,255,255);
-	ofLine(mouseX,0,mouseX,ofGetHeight());
-	ofLine(0,mouseY,ofGetWidth(),mouseY);
+	ofDrawLine(mouseX,0,mouseX,ofGetHeight());
+	ofDrawLine(0,mouseY,ofGetWidth(),mouseY);
     
 	//draw
 	glPushMatrix();{

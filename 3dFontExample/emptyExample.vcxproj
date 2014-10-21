@@ -96,12 +96,14 @@
     <ClCompile Include="..\..\..\addons\ofx3DFont\libs\poly2tri\sweep\sweep.cc" />
     <ClCompile Include="..\..\..\addons\ofx3DFont\libs\poly2tri\sweep\sweep_context.cc" />
     <ClCompile Include="..\..\..\addons\ofx3DFont\src\ofx3DFont.cpp" />
+    <ClCompile Include="..\..\..\addons\ofx3DFont\src\ofxMeshHelper.cpp" />
     <ClCompile Include="..\..\..\addons\ofxTrueTypeFontUL2\src\ofxTrueTypeFontUL2.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\testApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\ofx3DFont\src\ofx3DFont.h" />
+    <ClInclude Include="..\..\..\addons\ofx3DFont\src\ofxMeshHelper.h" />
     <ClInclude Include="..\..\..\addons\ofxTrueTypeFontUL2\src\ofxTrueTypeFontUL2.h" />
     <ClInclude Include="src\testApp.h" />
   </ItemGroup>
